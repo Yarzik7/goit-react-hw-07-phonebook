@@ -9,11 +9,11 @@ import { fetchContacts } from 'Redux/operations';
 
 const App = () => {
   const dispatch = useDispatch();
-  const {items, isLoading, error} = useSelector(selectContacts);
+  const { items, isLoading, error } = useSelector(selectContacts);
 
   useEffect(() => {
-    dispatch(fetchContacts())
-  }, [dispatch])
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <div className={css.app}>
@@ -25,8 +25,12 @@ const App = () => {
 
       <Filter />
 
-      {!items.length ? (
-        <p className={css.listEmpty}>The contact list is empty!</p>
+      {isLoading && <p className={css.info}>Loading...</p>}
+
+      {error && <p className={css.info}>{error}</p>}
+
+      {!error && !isLoading && !items.length ? (
+        <p className={css.info}>The contact list is empty!</p>
       ) : (
         <ContactList />
       )}

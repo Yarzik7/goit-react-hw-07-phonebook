@@ -19,7 +19,7 @@ const ContactItem = ({ name, number, contactId }) => {
         className={css.button}
         onClick={() => dispatch(deleteContact(contactId))}
       >
-        <FaTrash />
+       <FaTrash />
       </button>
     </li>
   );
@@ -28,7 +28,7 @@ const ContactItem = ({ name, number, contactId }) => {
 ContactItem.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  contactId: PropTypes.string.isRequired
+  contactId: PropTypes.string.isRequired,
 };
 
 export default ContactItem;

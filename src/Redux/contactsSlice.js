@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { fetchContacts, addContact, deleteContact } from './operations';
 
 const handlePending = state => {
+  state.error = null;
   state.isLoading = true;
 }
 
-const handleRejected = (state, {payload}) => {
+const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
 }
@@ -42,19 +40,10 @@ export const contactsSlice = createSlice({
     [deleteContact.fulfilled](state, { payload }) {
       state.isLoading = false;
       state.error = null;
-      const index = state.items.findIndex(({id}) => id === payload);
+      const index = state.items.findIndex(({id}) => id === payload.id);
       state.items.splice(index, 1);
     },
   },
 });
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  blacklist: ['filter'],
-};
-
-export const persistContactReducer = persistReducer(persistConfig, contactsSlice.reducer);
 export const contactsReducer = contactsSlice.reducer;
-
-// export const { fetchingInProgress, fetchingSuccess, fetchingError } = contactsSlice.actions;
