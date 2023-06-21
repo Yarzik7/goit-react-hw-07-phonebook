@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
 import ContactForm from '../ContactForm';
 import ContactList from '../ContactList';
 import Filter from '../Filter';
 import css from './App.module.css';
-import { useSelector } from 'react-redux';
-import { getContacts } from 'Redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from 'Redux/selectors';
+import { fetchContacts } from 'Redux/operations';
 
 const App = () => {
-  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const {items, isLoading, error} = useSelector(selectContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts())
+  }, [dispatch])
 
   return (
     <div className={css.app}>
@@ -18,7 +25,7 @@ const App = () => {
 
       <Filter />
 
-      {!contacts.length ? (
+      {!items.length ? (
         <p className={css.listEmpty}>The contact list is empty!</p>
       ) : (
         <ContactList />

@@ -1,4 +1,4 @@
-const getContacts = state => state.contacts.contacts ?? [];
-const getFilter = state => state.filter;
+const selectContacts = state => state.contacts;
+const selectFilter = state => state.filter;
 
-export {getContacts, getFilter}
+export {selectContacts, selectFilter}

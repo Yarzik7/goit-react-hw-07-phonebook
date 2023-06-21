@@ -3,12 +3,12 @@ import css from './Filter.module.css'
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeFilter } from 'Redux/filterSlice';
-import { getFilter } from 'Redux/selectors';
+import { selectFilter } from 'Redux/selectors';
 
 const Filter = () => {
   const filterInputId = useRef(nanoid());
 
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleChangeFilter = ({ target: { value } }) => dispatch(changeFilter(value));

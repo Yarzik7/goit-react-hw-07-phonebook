@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { FaTrash } from 'react-icons/fa';
 import css from './ContactItem.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'Redux/contactsSlice';
+import { deleteContact } from 'Redux/operations';
 
 const ContactItem = ({ name, number, contactId }) => {
   const dispatch = useDispatch();
